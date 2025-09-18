@@ -1,72 +1,57 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import *
+from .models import Order, OrderItem, Product
 import logging
 
-# Set up logging for debugging purposes
+# Logger for debugging
 logger = logging.getLogger(__name__)
 
+
+# -------------------------------
+# 1️⃣ Update stock when an order is created
+# -------------------------------
 @receiver(post_save, sender=Order)
 def update_stock_on_order(sender, instance, created, **kwargs):
-    """
-    Updates product stock when a new order is created.
-    """
-    if created:  # Trigger only when a new order is created
-        for product_data in instance.product_ids:
-            try:
-                # Retrieve the product based on the product ID
-                product_obj = Product.objects.get(id=product_data['id'])
-
-                # Check and update stock based on the quantity ordered
-                if product_obj.stock >= product_data['quantity']:
-                    product_obj.stock -= product_data['quantity']
-                    product_obj.save()
-                    logger.info(
-                        f"Stock updated for product {product_obj.name} (ID: {product_obj.id}). Remaining stock: {product_obj.stock}"
-                    )
-                else:
-                    logger.error(
-                        f"Insufficient stock for product {product_obj.name} (ID: {product_obj.id}). "
-                        f"Available: {product_obj.stock}, Requested: {product_data['quantity']}"
-                    )
-                    raise ValueError(
-                        f"Insufficient stock for product {product_obj.name}. Available: {product_obj.stock}, "
-                        f"Requested: {product_data['quantity']}"
-                    )
-
-            except Product.DoesNotExist:
-                logger.error(f"Product with ID {product_data['id']} does not exist.")
-                raise ValueError(f"Product with ID {product_data['id']} does not exist.")
+    if created:  # Only for new orders
+        for item in instance.order_items.all():  # use related_name 'order_items'
+            product = item.product
+            if product.stock >= item.quantity:
+                product.stock -= item.quantity
+                product.save()
+                logger.info(
+                    f"Stock updated for {product.name} (ID: {product.id}). Remaining stock: {product.stock}"
+                )
+            else:
+                logger.warning(
+                    f"Insufficient stock for {product.name} (ID: {product.id}). "
+                    f"Available: {product.stock}, Requested: {item.quantity}"
+                )
 
 
-@receiver(post_save, sender=Order)
+# -------------------------------
+# 2️⃣ Send email when order status changes to Delivered
+# -------------------------------
+@receiver(pre_save, sender=Order)
 def notify_on_status_change(sender, instance, **kwargs):
-    """
-    Sends email notifications to the user when the order status changes to 'Delivered'.
-    """
-    if instance.status == 'Delivered':
+    if not instance.pk:
+        return  # New order, skip
+
+    previous = Order.objects.get(pk=instance.pk)
+    if previous.status != 'Delivered' and instance.status == 'Delivered':
         try:
             send_mail(
-                'Order Delivered',
-                f'Hello {instance.user.username},\n\nYour order #{instance.id} has been successfully delivered!'
-                '\n\nThank you for shopping with us.',
-                settings.DEFAULT_FROM_EMAIL,
-                [instance.user.email],
-                fail_silently=False,  # Set to False to raise an error if sending fails
+                subject='Your Order is Delivered!',
+                message=(
+                    f"Hello {instance.user.username},\n\n"
+                    f"Your order #{instance.id} has been delivered successfully.\n\n"
+                    "Thank you for shopping with us!"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[instance.user.email],
+                fail_silently=False,
             )
-            logger.info(f"Delivery notification sent to {instance.user.email} for Order #{instance.id}.")
+            logger.info(f"Delivery notification sent to {instance.user.email} for Order #{instance.id}")
         except Exception as e:
-            logger.error(
-                f"Failed to send delivery notification for Order #{instance.id} to {instance.user.email}. Error: {str(e)}"
-            )
-
-
-
-# @receiver(post_save, sender=User)
-# def assign_default_group(sender, instance, created, **kwargs):
-#     if created:
-#         if instance.role == 'customer':
-#             group = Group.objects.get(name='Customer Group')
-#             instance.groups.add(group)
+            logger.error(f"Failed to send delivery notification for Order #{instance.id}: {str(e)}")

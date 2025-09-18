@@ -52,21 +52,17 @@ class LoginSerializer(serializers.Serializer):
 class DeliveryAddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = DeliveryAddress
-        fields = ['id','full_name', 'street', 'city', 'state', 'postal_code', 'country']
+        fields = ['id', 'full_name', 'street', 'city', 'state', 'postal_code', 'country']
 
 
 
 
 # Category Serializer
 class CategorySerializer(serializers.ModelSerializer):
-    subcategories = serializers.SerializerMethodField()
-
     class Meta:
         model = Category
-        fields = ['id', 'name', 'parent', 'subcategories']
+        fields = ['id', 'name']
 
-    def get_subcategories(self, obj):
-        return CategorySerializer(obj.subcategories.all(), many=True).data
 
 
 # Product Serializer
@@ -74,35 +70,11 @@ class CategorySerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'img', 'category', 'base_price', 'selling_Price' ,'stock_quantity']
-
-
-# OrderItem Serializer
-class OrderItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer()
-
-    class Meta:
-        model = OrderItem
-        fields = ['id', 'order', 'product', 'quantity']
-
-
-# Order Serializer
-class OrderSerializer(serializers.ModelSerializer):
-    order_items = OrderItemSerializer(many=True, read_only=True)
-    user = UserSerializer(read_only=True)
-    delivery_address = DeliveryAddressSerializer()
-
-    class Meta:
-        model = Order
-        fields = [
-            'id', 'user', 'delivery_address', 'assigned_agent', 'total_amount',
-            'status', 'estimated_delivery_time', 'created_at', 'updated_at', 'order_items'
-        ]
-        read_only_fields = ['total_amount', 'created_at', 'updated_at']
+        fields = ['id', 'name', 'img', 'category', 'base_price', 'selling_price' ,'stock_quantity']
 
 
 
-
+# cart
 
 
 class CartSerializer(serializers.ModelSerializer):
@@ -115,5 +87,86 @@ class CartSerializer(serializers.ModelSerializer):
 
 
 
+# =======================
+# OrderItem Serializer
+# =======================
+class OrderItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)  # nested product details
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(),
+        source='product',
+        write_only=True
+    )
+
+    class Meta:
+        model = OrderItem
+        fields = ['id', 'product', 'product_id', 'quantity', 'price_at_order', 'total_price']
+        read_only_fields = ['price_at_order', 'total_price']
 
 
+from rest_framework import serializers
+from .models import Order, OrderItem, Product
+
+# -------------------------
+# OrderItem Serializer
+# -------------------------
+class OrderItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(source="product.name", read_only=True)
+    product=ProductSerializer(read_only=True)
+    total_price = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
+
+    class Meta:
+        model = OrderItem
+        fields = ["id", "product", "product_name", "quantity", "price_at_order", "total_price"]
+
+    def create(self, validated_data):
+        # Set price_at_order automatically from Product
+        product = validated_data['product']
+        validated_data['price_at_order'] = product.selling_price or 0
+        return super().create(validated_data)
+
+# -------------------------
+# Customer Order Serializer
+# -------------------------
+class CustomerOrderSerializer(serializers.ModelSerializer):
+    order_items = OrderItemSerializer(many=True)
+    delivery_address = DeliveryAddressSerializer(read_only=True)
+    total_amount = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = ['id', 'order_items', 'status' , 'delivery_address', 'total_amount','created_at']
+
+    def create(self, validated_data):
+        order_items_data = validated_data.pop('order_items')
+        # user = self.context['request'].user
+        user = validated_data.pop('user', None)
+        order = Order.objects.create(user=user, **validated_data)
+        
+        for item_data in order_items_data:
+            product = item_data['product']
+            item_data['price_at_order'] = product.selling_price  # set snapshot price
+            OrderItem.objects.create(order=order, **item_data)
+        
+        # Optional: update total_amount in Order
+        order.total_price()  # recalculate total
+        return order
+
+      
+
+
+
+
+# For admins & delivery agents
+class AdminOrderSerializer(serializers.ModelSerializer):
+    order_items = OrderItemSerializer(many=True, read_only=True)
+    user_name = serializers.CharField(source="user.username", read_only=True)
+    agent_name = serializers.CharField(source="assigned_agent.username", read_only=True)
+
+    class Meta:
+        model = Order
+        fields = [
+            "id", "user", "user_name", "assigned_agent", "agent_name",
+            "delivery_address", "status", "estimated_delivery_time",
+            "total_amount", "created_at", "updated_at", "order_items"
+        ]

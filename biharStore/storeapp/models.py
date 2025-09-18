@@ -2,6 +2,10 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
 
+
+# =======================
+# Custom User Model
+# =======================
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('admin', 'Admin'),
@@ -37,9 +41,9 @@ class User(AbstractUser):
         }
 
 
-
-
-
+# =======================
+# Delivery Address
+# =======================
 class DeliveryAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='delivery_addresses')
     full_name = models.CharField(max_length=255, blank=True)
@@ -52,91 +56,92 @@ class DeliveryAddress(models.Model):
     def __str__(self):
         return f"{self.street}, {self.city}, {self.state}, {self.country} - {self.postal_code}"
 
-
-
-
-# Category model
+# =======================
+# Category & Product
+# =======================
 class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='subcategories', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.parent.name} -> {self.name}" if self.parent else self.name
-
-
-# Product model
-class Product(models.Model):
     name = models.CharField(max_length=255)
-    img = models.ImageField(upload_to='product/', null=True, blank=True)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    description = models.TextField(null=True)
-    base_price = models.DecimalField(max_digits=10, decimal_places=2,null=True)
-    selling_Price= models.DecimalField(max_digits=10, decimal_places=2,null=True)
-    stock_quantity = models.PositiveIntegerField(default=0,null=True)
 
     def __str__(self):
         return self.name
 
 
-# Order model with enhanced functionality
-class Order(models.Model):
-    STATUS_CHOICES = [
-        ('Pending', 'Pending'),
-        ('Assigned', 'Assigned'),
-        ('In Transit', 'In Transit'),
-        ('Delivered', 'Delivered'),
-        ('Cancelled', 'Cancelled'),
-    ]
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    img = models.URLField(blank=True, null=True)  # Or ImageField if handling uploads
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
+    base_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    selling_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    stock_quantity = models.PositiveIntegerField(default=0)
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
-    products = models.ManyToManyField(Product, through='OrderItem', related_name='orders')
-    delivery_address = models.ForeignKey(DeliveryAddress, on_delete=models.SET_NULL, null=True, blank=True)
-    assigned_agent = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_orders',
-        limit_choices_to={'role': 'delivery_agent'}
+    def __str__(self):
+        return self.name
+
+    @property
+    def stock_status(self):
+        return "In Stock" if self.stock_quantity > 0 else "Out of Stock"
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name']),
+        ]
+
+
+
+# =======================
+# Product Variant
+# =======================
+class ProductVariant(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='variants'
     )
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
-    estimated_delivery_time = models.TimeField(null=True, blank=True)
+    name = models.CharField(max_length=255)  # e.g., "128GB - Titanium Blue"
+    sku = models.CharField(max_length=100, unique=True, blank=True, null=True)  # Stock Keeping Unit
+    price_modifier = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0.00,
+        help_text="Price adjustment from Product.selling_price (can be positive or negative)"
+    )
+    stock_quantity = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Order #{self.id} - {self.status}"
+        return f"{self.product.name} - {self.name}"
 
-    def calculate_total(self):
-        total = sum(item.product.price * item.quantity for item in self.order_items.all())
-        self.total_amount = total
-        self.save()
+    @property
+    def total_price(self):
+        """
+        Calculate the total price for this variant (base price + modifier).
+        """
+        base_price = self.product.selling_price or self.product.base_price or 0
+        return base_price + self.price_modifier
+
+    @property
+    def stock_status(self):
+        """
+        Return stock status for this variant.
+        """
+        return "In Stock" if self.stock_quantity > 0 else "Out of Stock"
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['product', 'name']),
+            models.Index(fields=['sku']),
+        ]
+        unique_together = [['product', 'name']]  # Ensure unique variant names per product
 
 
-# OrderItem model
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-        return f"{self.product.name} (x{self.quantity})"
-
-
-
-
-
-
-# Cart model
+# =======================
+# Cart Model
+# =======================
 class Cart(models.Model):
-    user = models.ForeignKey(
-        'User',
-        on_delete=models.CASCADE,
-        related_name='cart',
-        null=True
-    )
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        related_name='cart_items'
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart', null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart_items')
     quantity = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -146,7 +151,7 @@ class Cart(models.Model):
         """
         Calculate total price for the product in the cart.
         """
-        return self.product.price * self.quantity
+        return self.product.selling_price * self.quantity if self.product.selling_price else 0
 
     def __str__(self):
         return f"Cart: {self.user.username} - {self.product.name} ({self.quantity})"
@@ -165,3 +170,60 @@ class Cart(models.Model):
         else:
             cart_item.delete()
             return None
+
+
+# =======================
+# Order & OrderItem
+# =======================
+class Order(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Assigned', 'Assigned'),
+        ('In Transit', 'In Transit'),
+        ('Delivered', 'Delivered'),
+        ('Cancelled', 'Cancelled'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    products = models.ManyToManyField(Product, through='OrderItem', related_name='orders')
+    delivery_address = models.ForeignKey(DeliveryAddress, on_delete=models.SET_NULL, null=True, blank=True)
+    assigned_agent = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='assigned_orders',
+        limit_choices_to={'role': 'delivery_agent'}
+    )
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+    estimated_delivery_time = models.DateTimeField(null=True, blank=True)  # Fixed from TimeField
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Order #{self.id} - {self.status}"
+
+    def total_price(self):
+        """
+        Recalculate and update the order total.
+        """
+        total = sum(item.total_price for item in self.order_items.all())
+        self.total_amount = total
+        self.save()
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    price_at_order = models.DecimalField(max_digits=10, decimal_places=2,null=True)  # store snapshot price
+
+    def __str__(self):
+        return f"{self.product.name} (x{self.quantity})"
+
+    @property
+    def total_price(self):
+        price = self.price_at_order or 0  # default to 0 if None
+        return price * self.quantity
+

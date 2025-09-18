@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'storeapp',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -90,10 +91,8 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  
-    "http://localhost:5173"
-]
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -141,8 +140,8 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    # 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    # 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
@@ -175,3 +174,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+
+RAZORPAY_KEY_ID = "rzp_test_xxxxxxxx"
+RAZORPAY_KEY_SECRET = "your_secret_here"
+

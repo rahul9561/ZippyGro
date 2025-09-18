@@ -1,118 +1,34 @@
-name,category,base_price,img,selling_Price
-Tomato  ,vegetable,50,F:\ZippyGro\biharStore\media\product\Picture2.jpg,45
-Potato,vegetable,35,F:\ZippyGro\biharStore\media\product\Picture3.jpg,32
-Onion,vegetable,50,F:\ZippyGro\biharStore\media\product\Picture4.png,45
-Coriander Leaves,vegetable,50/100g,F:\ZippyGro\biharStore\media\product\Picture5.jpg,45/100g
-Eggs,Dairy & Bakery,10/pice,F:\ZippyGro\biharStore\media\product\Picture6.png,9/pice
-Horlicks,Dairy & Bakery,570,F:\ZippyGro\biharStore\media\product\Picture7.jpg,542
-BournVita,Dairy & Bakery,479,F:\ZippyGro\biharStore\media\product\Picture8.png,462
-Bread,Dairy & Bakery,20/packet,F:\ZippyGro\biharStore\media\product\Picture9.jpg,18/packet
-Dry Rusk,Dairy & Bakery,30/packet,F:\ZippyGro\biharStore\media\product\Picture10.jpg,27/packet
-Scooter,Mustard oil,160,F:\ZippyGro\biharStore\media\product\Picture11.jpg,   152/pice
-Bail kolhu,Mustard oil,160,F:\ZippyGro\biharStore\media\product\Picture12.jpg,   152/pice
-Dhara,Mustard oil,160,F:\ZippyGro\biharStore\media\product\Picture13.jpg,    152/pice
-Fortune,Mustard oil,160,F:\ZippyGro\biharStore\media\product\Picture14.jpg,   152/pice
-Fourtune,Refined,160,F:\ZippyGro\biharStore\media\product\Picture15.jpg,     152/pice
-Dhara,Refined,160,F:\ZippyGro\biharStore\media\product\Picture16.jpg,     152/pice
-Ruchi gold,Refined,140,F:\ZippyGro\biharStore\media\product\Picture17.jpg,     133/pice
-Coconut oil,Hair oil,300/250ml,F:\ZippyGro\biharStore\media\product\Picture18.jpg,280/250ml
-Bajaj,Hair oil,142/190ml,F:\ZippyGro\biharStore\media\product\Picture19.jpg,140/190ml
-Jasmine oil,Hair oil,142/300ml,F:\ZippyGro\biharStore\media\product\Picture20.jpg,130/300ml
-Nihar,Hair oil,99/225ml,F:\ZippyGro\biharStore\media\product\Picture21.jpg,95/225ml
-Kesh king,Hair oil,195/120ml,F:\ZippyGro\biharStore\media\product\Picture22.jpg,190/120ml
-Bajaj amla,Hair oil,142/200g,F:\ZippyGro\biharStore\media\product\Picture23.jpg,138/pice
-Whole Wheat Flour (Atta),Atta & Other Flours,45,F:\ZippyGro\biharStore\media\product\Picture24.jpg,41
-Maida (All-Purpose Flour),Atta & Other Flours,50,F:\ZippyGro\biharStore\media\product\Picture25.jpg,45
-Sooji (Cream of Wheat),Atta & Other Flours,50,F:\ZippyGro\biharStore\media\product\Picture26.jpg,45
-Rice Flour,Atta & Other Flours,50,F:\ZippyGro\biharStore\media\product\Picture27.jpg,45
-Maize Flour,Atta & Other Flours,50,F:\ZippyGro\biharStore\media\product\Picture28.jpg,45
-Chana flour (Besan),Atta & Other Flours,140,F:\ZippyGro\biharStore\media\product\Picture29.jpg,126
-Sattu Flour (Roasted Bengal),Atta & Other Flours,130,F:\ZippyGro\biharStore\media\product\Picture30.jpg,117
-Toor Dal (Pigeon Pea),Dals & Pulses,190,F:\ZippyGro\biharStore\media\product\Picture31.jpg,171
-Moong Dal (Green Gram),Dals & Pulses,150,F:\ZippyGro\biharStore\media\product\Picture32.jpg,135
-Masoor Dal (Red Lentils),Dals & Pulses,100,F:\ZippyGro\biharStore\media\product\Picture33.jpg,90
-Urad Dal (Black Gram),Dals & Pulses,140,F:\ZippyGro\biharStore\media\product\Picture34.jpg,126
-Chana Dal (Split Bengal Gram),Dals & Pulses,115,F:\ZippyGro\biharStore\media\product\Picture35.jpg,100
-Kala Chana (Black Chickpeas),Dals & Pulses,100,F:\ZippyGro\biharStore\media\product\Picture36.jpg,90
-Rajma (Kidney Beans),Dals & Pulses,190,F:\ZippyGro\biharStore\media\product\Picture37.png,171
-Green Peas (Matar),Dals & Pulses,90,F:\ZippyGro\biharStore\media\product\Picture38.jpg,85
-Soya Chunks (Soyabin),Dals & Pulses ,130,F:\ZippyGro\biharStore\media\product\Picture39.jpg,120
-Tuar Dal (Tur Dal),Dals & Pulses,190,F:\ZippyGro\biharStore\media\product\Picture40.jpg,175
-Chickpeas (Kabuli Chana),Dals & Pulses,150,F:\ZippyGro\biharStore\media\product\Picture41.jpg,150
-Basmati Rice,Rice & more,90,F:\ZippyGro\biharStore\media\product\Picture42.jpg,85
-Jasmine Rice,Rice & more,100,F:\ZippyGro\biharStore\media\product\Picture43.jpg,95
-Sona Masoori Rice,Rice & more,40,F:\ZippyGro\biharStore\media\product\Picture44.jpg,35
-Parboiled Rice,Rice & more,50,F:\ZippyGro\biharStore\media\product\Picture45.jpg,45
-Brown Rice,Rice & more,55,F:\ZippyGro\biharStore\media\product\Picture46.jpg,50
-White Rice,Rice & more,50,F:\ZippyGro\biharStore\media\product\Picture47.jpg,45
-Red Rice,Rice & more,200,F:\ZippyGro\biharStore\media\product\Picture48.jpg,190
-Turmeric Powder,Powder & Masala,90/250g,F:\ZippyGro\biharStore\media\product\Picture49.jpg,80/250g
-Chili Powder,Powder & Masala,100/250g,F:\ZippyGro\biharStore\media\product\Picture50.jpg,90/250g
-Coriander Powder,Powder & Masala,80/250g,F:\ZippyGro\biharStore\media\product\Picture51.jpg,70/250g
-Chilli,Powder & Masala,80/250g,F:\ZippyGro\biharStore\media\product\Picture52.jpg,75/250g
-Cornstarch (Cornflour),Powder & Masala,60,F:\ZippyGro\biharStore\media\product\Picture53.jpg,55
-Garam Masala,Powder & Masala,5/pice,F:\ZippyGro\biharStore\media\product\Picture54.jpg,5/pice
-Chaat Masala,Powder & Masala,5/pice,F:\ZippyGro\biharStore\media\product\Picture55.png,5/pice
-Biryani Masala,Powder & Masala,5/pice,F:\ZippyGro\biharStore\media\product\Picture56.jpg,5/pice
-Meat Masala,Powder & Masala,5/pice,F:\ZippyGro\biharStore\media\product\Picture57.jpg,5/pice
-Kitchen King Masala,Powder & Masala,100/100g,F:\ZippyGro\biharStore\media\product\Picture58.jpg, 95/100g
-Methi Masala,Powder & Masala,60/50g,F:\ZippyGro\biharStore\media\product\Picture59.jpg,55/50g
-Shahi Garam Masala,Powder & Masala,55/100g,F:\ZippyGro\biharStore\media\product\Picture60.jpg,53/100g
-Panch Phoran Masala,Powder & Masala,45/100g,F:\ZippyGro\biharStore\media\product\Picture61.jpg,40/100g
-Black pepper,Powder & Masala,90/100g,F:\ZippyGro\biharStore\media\product\Picture62.png,85/100g
-Yellow mustard seeds,Powder & Masala,30/100g,F:\ZippyGro\biharStore\media\product\Picture63.jpg,25/100g
-Black mustard seeds,Powder & Masala,25/100g,F:\ZippyGro\biharStore\media\product\Picture64.jpg,20/100g
-Garlic,Powder & Masala,300,F:\ZippyGro\biharStore\media\product\Picture65.png,280
-Sugar,Sugar & Salt,50,F:\ZippyGro\biharStore\media\product\Picture66.png,45
-Jaggery (Gudd),Sugar & Salt,60,F:\ZippyGro\biharStore\media\product\Picture67.jpg,55
-Tata salt,Sugar & Salt,30,F:\ZippyGro\biharStore\media\product\Picture68.jpg,28
-J&K salt,Sugar & Salt,15,F:\ZippyGro\biharStore\media\product\Picture69.jpg,12
-Black salt (Kala Namak),Sugar & Salt,50,F:\ZippyGro\biharStore\media\product\Picture70.jpg,45
-Himalayan salt (sendha namak),Sugar & Salt,50,F:\ZippyGro\biharStore\media\product\Picture71.jpg,45
-Soap,Laundry& Dishwash,10/pice,F:\ZippyGro\biharStore\media\product\Picture72.jpg,10/pice
-SurfExcel ,Laundry& Dishwash,140,F:\ZippyGro\biharStore\media\product\Picture73.jpg,135
-Ghadi ,Laundry& Dishwash,75,F:\ZippyGro\biharStore\media\product\Picture74.jpg,70
-Guide ,Laundry& Dishwash,71,F:\ZippyGro\biharStore\media\product\Picture75.png,70
-Tide ,Laundry& Dishwash,135,F:\ZippyGro\biharStore\media\product\Picture76.jpg,130
-Ezee ,Laundry& Dishwash,10/pice,F:\ZippyGro\biharStore\media\product\Picture77.jpg,10/pice
-Chowmine ,Noodles &Pasta,35/packet,F:\ZippyGro\biharStore\media\product\Picture78.jpg,30/packet
-Maggi ,Noodles &Pasta,12/pice,F:\ZippyGro\biharStore\media\product\Picture79.png,12/pice
-Micronee ,Noodles &Pasta,80,F:\ZippyGro\biharStore\media\product\Picture80.jpg,75
-Pasta ,Noodles &Pasta,80,F:\ZippyGro\biharStore\media\product\Picture81.jpg,75
-Jibhiya ,Oral Care,10/pice,F:\ZippyGro\biharStore\media\product\Picture82.jpg,8/pice
-Tooth Brush ,Oral Care,20/pice,F:\ZippyGro\biharStore\media\product\Picture83.jpg,18/pice
-ToothPaste ,Oral Care,10/pice,F:\ZippyGro\biharStore\media\product\Picture84.jpg,10/pice
-Baby mussage oil,Baby Care,240/200ml,F:\ZippyGro\biharStore\media\product\Picture85.jpg,220/200ml
-Baby cream (1111),Baby Care,280/200ml,F:\ZippyGro\biharStore\media\product\Picture86.jpg,275/200ml
-Baby powder (1112),Baby Care,210/200g,F:\ZippyGro\biharStore\media\product\Picture87.jpg,190/200g
-Baby soap (1113),Baby Care,60/75g,F:\ZippyGro\biharStore\media\product\Picture88.png,    55/75g
-Baby sampoo (1114),Baby Care,210/200ml,F:\ZippyGro\biharStore\media\product\Picture89.jpg,  190/200ml
-Baby hair oil (1115),Baby Care,250/200ml,F:\ZippyGro\biharStore\media\product\Picture90.jpg,  225/200ml
-Phenile (1205),Household Cleaning,70/liter,F:\ZippyGro\biharStore\media\product\Picture91.png,    63/Liter
-Harpic (1201),Household Cleaning,189/Liter,F:\ZippyGro\biharStore\media\product\Picture92.png,    172/Liter
-Acid (1202),Household Cleaning,99/500-ml,F:\ZippyGro\biharStore\media\product\Picture93.png,    90/500-ml
-Jhadhu (1203),Household Cleaning,100/pice,F:\ZippyGro\biharStore\media\product\Picture94.jpg,  90/pice
-Wipper (1204),Household Cleaning,90/pice,F:\ZippyGro\biharStore\media\product\Picture95.png,    80/pice
-Lotion (1304),Body & Skin Care,435/400ml,F:\ZippyGro\biharStore\media\product\Picture96.png,     400/400ml
-Life Boy,Body & Skin Care,10/pice,F:\ZippyGro\biharStore\media\product\Picture97.png,    10/pice
-Lux,Body & Skin Care,10/pice,F:\ZippyGro\biharStore\media\product\Picture98.png,    10/pice
-Dove,Body & Skin Care,25/pice,F:\ZippyGro\biharStore\media\product\Picture99.png,     25/pice
-Dettole,Body & Skin Care,10/pice,F:\ZippyGro\biharStore\media\product\Picture100.png,     10/pice
-FashWash (1302),Body & Skin Care,79/50g,F:\ZippyGro\biharStore\media\product\Picture101.jpg,       75/35g
-Cream (1303),Body & Skin Care,159/35g,F:\ZippyGro\biharStore\media\product\Picture102.jpg,       150/35g
-Boroline (1404),Beauty & Grooming,10/pice,F:\ZippyGro\biharStore\media\product\Picture103.jpg,        10/pice
-Fair & Lovely (1401),Beauty & Grooming,160/100g,F:\ZippyGro\biharStore\media\product\Picture104.jpg,       150/100g
-BoroPlus (1402),Beauty & Grooming,210/120ml,F:\ZippyGro\biharStore\media\product\Picture105.png,      190/120ml
-Vicco (1403),Beauty & Grooming,200/45g,F:\ZippyGro\biharStore\media\product\Picture106.png,        180/45g
-Cilnic plus,Shampoo,15/15-pice,F:\ZippyGro\biharStore\media\product\Picture107.png,       13/15-pice
-Dove,Shampoo,32/16-pice,F:\ZippyGro\biharStore\media\product\Picture108.png,       30/16-pice
-Head & Solder,Shampoo,32/16-pice,F:\ZippyGro\biharStore\media\product\Picture109.png,         30/16-pice
-SunSilk,Shampoo,15/15-pice,F:\ZippyGro\biharStore\media\product\Picture110.png,          13/15-pice
-Kurkure (801),CornMeal,5/pice,F:\ZippyGro\biharStore\media\product\Picture111.jpg,         5/pice
-Takatak (802),CornMeal,5/pice,F:\ZippyGro\biharStore\media\product\Picture112.jpg,        5/pice
-Lay's  (803),CornMeal,5/pice,F:\ZippyGro\biharStore\media\product\Picture113.png,          5/pice
-Chip's (804),CornMeal,5/pice,F:\ZippyGro\biharStore\media\product\Picture114.jpg,           5/pice
-MoongDal (805),CornMeal,5/pice,F:\ZippyGro\biharStore\media\product\Picture115.jpg,            5/pice
-Bhujia (806),CornMeal,5/pice,F:\ZippyGro\biharStore\media\product\Picture116.jpg,            5/pice
-Punjabi Tadka (807),CornMeal,5/pice,F:\ZippyGro\biharStore\media\product\Picture117.jpg,             5/pice
-Mixture (808),CornMeal,5/pice,F:\ZippyGro\biharStore\media\product\Picture118.jpg,             5/pice
+name,category,description,base_price,img,selling_price,stock_quantity
+Whole Wheat Flour (Atta),Atta & Other Flours,Fresh and high-quality whole wheat flour,45,https://zippygro.com/media/media/product/Picture24.jpg,41,20
+Maida (All-Purpose Flour),Atta & Other Flours,Refined and versatile all-purpose flour,50,https://zippygro.com/media/media/product/Picture25.jpg,45,25
+Sooji (Cream of Wheat),Atta & Other Flours,Finely milled and fresh sooji,50,https://zippygro.com/media/media/product/Picture26.jpg,45,30
+Rice Flour,Atta & Other Flours,Soft and fresh rice flour,50,https://zippygro.com/media/media/product/Picture27.jpg,45,15
+Maize Flour,Atta & Other Flours,Rich and fresh maize flour,50,https://zippygro.com/media/media/product/Picture28.jpg,45,20
+Chana Flour (Besan),Atta & Other Flours,Fine and high-protein gram flour,140,https://zippygro.com/media/media/product/Picture29.jpg,126,10
+Sattu Flour (Roasted Bengal),Atta & Other Flours,Nutritious roasted Bengal gram flour,130,https://zippygro.com/media/media/product/Picture30.jpg,117,12
+Toor Dal (Pigeon Pea),Dals & Pulses,Premium and fresh toor dal,190,https://zippygro.com/media/media/product/Picture31.jpg,171,25
+Moong Dal (Green Gram),Dals & Pulses,Healthy and protein-rich moong dal,150,https://zippygro.com/media/media/product/Picture32.jpg,135,20
+Masoor Dal (Red Lentils),Dals & Pulses,Delicious and nutritious red lentils,100,https://zippygro.com/media/media/product/Picture33.jpg,90,15
+Urad Dal (Black Gram),Dals & Pulses,Premium quality urad dal,140,https://zippygro.com/media/media/product/Picture34.jpg,126,30
+Chana Dal (Split Bengal Gram),Dals & Pulses,Fresh and high-quality chana dal,115,https://zippygro.com/media/media/product/Picture35.jpg,100,25
+Kala Chana (Black Chickpeas),Dals & Pulses,Rich in protein black chickpeas,100,https://zippygro.com/media/media/product/Picture36.jpg,90,15
+Rajma (Kidney Beans),Dals & Pulses,Nutritious and delicious kidney beans,190,https://zippygro.com/media/media/product/Picture37.png,171,20
+Green Peas (Matar),Dals & Pulses,Fresh and high-quality green peas,90,https://zippygro.com/media/media/product/Picture38.jpg,85,30
+Soya Chunks (Soyabin),Dals & Pulses,Protein-packed soya chunks,130,https://zippygro.com/media/media/product/Picture39.jpg,120,25
+Tuar Dal (Tur Dal),Dals & Pulses,Premium and flavorful tur dal,190,https://zippygro.com/media/media/product/Picture40.jpg,175,15
+Chickpeas (Kabuli Chana),Dals & Pulses,High-quality Kabuli chana,150,https://zippygro.com/media/media/product/Picture41.jpg,150,20
+Basmati Rice,Rice & more,Long-grain and aromatic basmati rice,90,https://zippygro.com/media/media/product/Picture42.jpg,85,40
+Jasmine Rice,Rice & more,Fragrant and premium jasmine rice,100,https://zippygro.com/media/media/product/Picture43.jpg,95,25
+Sona Masoori Rice,Rice & more,Light and fluffy Sona Masoori rice,40,https://zippygro.com/media/media/product/Picture44.jpg,35,30
+Parboiled Rice,Rice & more,Healthy and high-quality parboiled rice,50,https://zippygro.com/media/media/product/Picture45.jpg,45,20
+Brown Rice,Rice & more,Nutritious and whole-grain brown rice,55,https://zippygro.com/media/media/product/Picture46.jpg,50,15
+White Rice,Rice & more,Soft and fresh white rice,50,https://zippygro.com/media/media/product/Picture47.jpg,45,20
+Red Rice,Rice & more,Unique and nutritious red rice,200,https://zippygro.com/media/media/product/Picture48.jpg,190,10
+Turmeric Powder,Powder & Masala,Pure and flavorful turmeric powder,90,https://zippygro.com/media/media/product/Picture49.jpg,80,30
+Chili Powder,Powder & Masala,Spicy and fresh chili powder,100,https://zippygro.com/media/media/product/Picture50.jpg,90,25
+Coriander Powder,Powder & Masala,Aromatic and fresh coriander powder,80,https://zippygro.com/media/media/product/Picture51.jpg,70,20
+Chilli,Powder & Masala,Fresh and fiery whole chilies,80,https://zippygro.com/media/media/product/Picture52.jpg,75,25
+Cornstarch (Cornflour),Powder & Masala,Fine and versatile cornstarch,60,https://zippygro.com/media/media/product/Picture53.jpg,55,15
+Sugar,Sugar & Salt,High-quality and refined sugar,50,https://zippygro.com/media/media/product/Picture66.png,45,40
+Jaggery (Gudd),Sugar & Salt,Natural and nutrient-rich jaggery,60,https://zippygro.com/media/media/product/Picture67.jpg,55,25
+Tata salt,Sugar & Salt,Trusted and refined Tata salt,30,https://zippygro.com/media/media/product/Picture68.jpg,28,35
