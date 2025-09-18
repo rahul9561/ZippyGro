@@ -1,7 +1,7 @@
-# 🛒 ZippyGro – 10-Minute Grocery Delivery Platform
+# 🛒 ZippyGro –  Delivery Platform
 
-ZippyGro is a **quick-commerce e-commerce platform** inspired by Zepto and Blinkit.  
-It allows users to browse groceries, add items to their cart, and place orders with **10-minute delivery**.  
+ZippyGro is a ** e-commerce platform** inspired by Zepto and Blinkit.  
+It allows users to browse groceries, add items to their cart, and place orders with ** delivery**.  
 
 Built with a **React frontend** and **Django REST backend**, ZippyGro provides a seamless shopping experience with real-time authentication, cart management, and product filtering.
 
@@ -12,7 +12,7 @@ Built with a **React frontend** and **Django REST backend**, ZippyGro provides a
 - 🔍 Filters & Search – Quickly find products by category or keyword  
 - 🛒 Cart Management – Add, update, or remove items with live total calculation  
 - 🔐 JWT Authentication – Secure login & registration system  
-- ⚡ 10-Minute Delivery Concept – Optimized for speed and reliability  
+- ⚡ Delivery Concept – Optimized for speed and reliability  
 - 📱 Responsive UI – Mobile-friendly React design  
 
 ---
