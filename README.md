@@ -69,8 +69,8 @@ python manage.py runserver
 Backend will run at 👉 http://127.0.0.1:8000/
 
 3️⃣ Frontend Setup (React)
-cd frontDev/ecom
 ```bash
+cd frontDev/ecom
 npm install
 npm start
 ```
